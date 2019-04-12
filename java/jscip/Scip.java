@@ -463,5 +463,10 @@ public class Scip
       return SCIPJNI.SCIPgetUpperbound(_scipptr);
   }
 
+   /** wraps SCIPgetSolvingTime() */
+   public double getSolvingTime()
+   {
+      return SCIPJNI.SCIPgetSolvingTime(_scipptr);
+   }
 
 }
