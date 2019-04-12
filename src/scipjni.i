@@ -3,7 +3,28 @@
 %{
    #include "scip/scip.h"
    #include "scip/scipdefplugins.h"
+  #include "scip/scip_solvingstats.h"
 
+   void chgVarObj(SCIP* scip, SCIP_VAR* var, SCIP_Real newobj)
+   {
+      SCIP_CALL_ABORT( SCIPchgVarObj(scip, var, newobj) );
+    }
+
+  SCIP_Real  getGap(SCIP*  scip){
+      return SCIPgetGap(scip);
+  }
+
+  SCIP_Real  getDualbound(SCIP*  scip){
+      return SCIPgetDualbound(scip);
+  }
+
+  SCIP_Real  getLowerbound(SCIP*  scip){
+      return SCIPgetLowerbound(scip);
+  }
+
+   SCIP_Real getUpperbound(SCIP*  scip){
+      return SCIPgetUpperbound(scip);
+  }
    /* assist function to create a SCIP */
    SCIP* createSCIP()
    {
@@ -121,18 +142,18 @@ enum SCIP_Vartype
 typedef enum SCIP_Vartype SCIP_VARTYPE;
 
 /* SCIP ParamEmphasis enum */
-enum SCIP_ParamEmphasis 
-{ 
-  SCIP_PARAMEMPHASIS_DEFAULT = 0, 
-  SCIP_PARAMEMPHASIS_CPSOLVER = 1, 
-  SCIP_PARAMEMPHASIS_EASYCIP = 2, 
-  SCIP_PARAMEMPHASIS_FEASIBILITY = 3, 
-  SCIP_PARAMEMPHASIS_HARDLP = 4, 
-  SCIP_PARAMEMPHASIS_OPTIMALITY = 5, 
-  SCIP_PARAMEMPHASIS_COUNTER = 6, 
-  SCIP_PARAMEMPHASIS_PHASEFEAS = 7, 
-  SCIP_PARAMEMPHASIS_PHASEIMPROVE = 8, 
-  SCIP_PARAMEMPHASIS_PHASEPROOF = 9 
+enum SCIP_ParamEmphasis
+{
+  SCIP_PARAMEMPHASIS_DEFAULT = 0,
+  SCIP_PARAMEMPHASIS_CPSOLVER = 1,
+  SCIP_PARAMEMPHASIS_EASYCIP = 2,
+  SCIP_PARAMEMPHASIS_FEASIBILITY = 3,
+  SCIP_PARAMEMPHASIS_HARDLP = 4,
+  SCIP_PARAMEMPHASIS_OPTIMALITY = 5,
+  SCIP_PARAMEMPHASIS_COUNTER = 6,
+  SCIP_PARAMEMPHASIS_PHASEFEAS = 7,
+  SCIP_PARAMEMPHASIS_PHASEIMPROVE = 8,
+  SCIP_PARAMEMPHASIS_PHASEPROOF = 9
 };
 typedef enum SCIP_ParamEmphasis SCIP_PARAMEMPHASIS;
 
@@ -148,6 +169,8 @@ typedef enum SCIP_Objsense SCIP_OBJSENSE;
 SCIP_Real      SCIPcalcMachineEpsilon();
 
 /* from scip.h*/
+
+
 SCIP_RETCODE   SCIPcreate(SCIP** scip);
 int            SCIPgetNVars(SCIP* scip);
 SCIP_RETCODE   SCIPreadProb(SCIP* scip, const char* filename, const char* extension);
@@ -217,3 +240,12 @@ SCIP_CONS*     createConsBasicLinear(SCIP* scip, const char* name , int nvars, S
 SCIP_CONS*     createConsBasicQuadratic(SCIP* scip, const char* name, int nlinvars, SCIP_VAR** linvars, SCIP_Real* lincoefs, int nquadvars, SCIP_VAR** quadvars1, SCIP_VAR** quadvars2, SCIP_Real* quadcoefs, SCIP_Real lhs, SCIP_Real rhs);
 SCIP_CONS*     createConsBasicSuperIndicator(SCIP *scip, const char *name, SCIP_VAR *binvar, SCIP_CONS *slackcons);
 void           releaseCons(SCIP* scip, SCIP_CONS* cons);
+
+
+
+SCIP_RETCODE SCIPchgVarObj(SCIP*  scip, SCIP_VAR* var, SCIP_Real newobj);
+SCIP_Real SCIPgetGap(SCIP*  scip);
+SCIP_Real SCIPgetDualbound(SCIP* scip);
+SCIP_Real SCIPgetLowerbound(SCIP* scip);
+SCIP_Real SCIPgetUpperbound(SCIP* scip);
+SCIP_Real SCIPgetSolvingTime(SCIP* scip);

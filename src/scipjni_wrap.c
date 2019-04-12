@@ -208,7 +208,28 @@ static void SWIGUNUSED SWIG_JavaThrowException(JNIEnv *jenv, SWIG_JavaExceptionC
 
    #include "scip/scip.h"
    #include "scip/scipdefplugins.h"
+  #include "scip/scip_solvingstats.h"
 
+   void chgVarObj(SCIP* scip, SCIP_VAR* var, SCIP_Real newobj)
+   {
+      SCIP_CALL_ABORT( SCIPchgVarObj(scip, var, newobj) );
+    }
+
+  SCIP_Real  getGap(SCIP*  scip){
+      return SCIPgetGap(scip);
+  }
+
+  SCIP_Real  getDualbound(SCIP*  scip){
+      return SCIPgetDualbound(scip);
+  }
+
+  SCIP_Real  getLowerbound(SCIP*  scip){
+      return SCIPgetLowerbound(scip);
+  }
+
+   SCIP_Real getUpperbound(SCIP*  scip){
+      return SCIPgetUpperbound(scip);
+  }
    /* assist function to create a SCIP */
    SCIP* createSCIP()
    {
@@ -1985,6 +2006,94 @@ SWIGEXPORT void JNICALL Java_jscip_SCIPJNIJNI_releaseCons(JNIEnv *jenv, jclass j
   arg1 = *(SCIP **)&jarg1; 
   arg2 = *(SCIP_CONS **)&jarg2; 
   releaseCons(arg1,arg2);
+}
+
+
+SWIGEXPORT jint JNICALL Java_jscip_SCIPJNIJNI_SCIPchgVarObj(JNIEnv *jenv, jclass jcls, jlong jarg1, jlong jarg2, jdouble jarg3) {
+  jint jresult = 0 ;
+  SCIP *arg1 = (SCIP *) 0 ;
+  SCIP_VAR *arg2 = (SCIP_VAR *) 0 ;
+  double arg3 ;
+  SCIP_RETCODE result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(SCIP **)&jarg1; 
+  arg2 = *(SCIP_VAR **)&jarg2; 
+  arg3 = (double)jarg3; 
+  result = (SCIP_RETCODE)SCIPchgVarObj(arg1,arg2,arg3);
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jdouble JNICALL Java_jscip_SCIPJNIJNI_SCIPgetGap(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  jdouble jresult = 0 ;
+  SCIP *arg1 = (SCIP *) 0 ;
+  double result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(SCIP **)&jarg1; 
+  result = (double)SCIPgetGap(arg1);
+  jresult = (jdouble)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jdouble JNICALL Java_jscip_SCIPJNIJNI_SCIPgetDualbound(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  jdouble jresult = 0 ;
+  SCIP *arg1 = (SCIP *) 0 ;
+  double result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(SCIP **)&jarg1; 
+  result = (double)SCIPgetDualbound(arg1);
+  jresult = (jdouble)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jdouble JNICALL Java_jscip_SCIPJNIJNI_SCIPgetLowerbound(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  jdouble jresult = 0 ;
+  SCIP *arg1 = (SCIP *) 0 ;
+  double result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(SCIP **)&jarg1; 
+  result = (double)SCIPgetLowerbound(arg1);
+  jresult = (jdouble)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jdouble JNICALL Java_jscip_SCIPJNIJNI_SCIPgetUpperbound(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  jdouble jresult = 0 ;
+  SCIP *arg1 = (SCIP *) 0 ;
+  double result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(SCIP **)&jarg1; 
+  result = (double)SCIPgetUpperbound(arg1);
+  jresult = (jdouble)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jdouble JNICALL Java_jscip_SCIPJNIJNI_SCIPgetSolvingTime(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  jdouble jresult = 0 ;
+  SCIP *arg1 = (SCIP *) 0 ;
+  double result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(SCIP **)&jarg1; 
+  result = (double)SCIPgetSolvingTime(arg1);
+  jresult = (jdouble)result; 
+  return jresult;
 }
 
 

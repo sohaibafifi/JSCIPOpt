@@ -315,4 +315,28 @@ public class SCIPJNI {
     SCIPJNIJNI.releaseCons(SWIGTYPE_p_SCIP.getCPtr(scip), SWIGTYPE_p_SCIP_CONS.getCPtr(cons));
   }
 
+  public static SCIP_Retcode SCIPchgVarObj(SWIGTYPE_p_SCIP scip, SWIGTYPE_p_SCIP_VAR var, double newobj) {
+    return SCIP_Retcode.swigToEnum(SCIPJNIJNI.SCIPchgVarObj(SWIGTYPE_p_SCIP.getCPtr(scip), SWIGTYPE_p_SCIP_VAR.getCPtr(var), newobj));
+  }
+
+  public static double SCIPgetGap(SWIGTYPE_p_SCIP scip) {
+    return SCIPJNIJNI.SCIPgetGap(SWIGTYPE_p_SCIP.getCPtr(scip));
+  }
+
+  public static double SCIPgetDualbound(SWIGTYPE_p_SCIP scip) {
+    return SCIPJNIJNI.SCIPgetDualbound(SWIGTYPE_p_SCIP.getCPtr(scip));
+  }
+
+  public static double SCIPgetLowerbound(SWIGTYPE_p_SCIP scip) {
+    return SCIPJNIJNI.SCIPgetLowerbound(SWIGTYPE_p_SCIP.getCPtr(scip));
+  }
+
+  public static double SCIPgetUpperbound(SWIGTYPE_p_SCIP scip) {
+    return SCIPJNIJNI.SCIPgetUpperbound(SWIGTYPE_p_SCIP.getCPtr(scip));
+  }
+
+  public static double SCIPgetSolvingTime(SWIGTYPE_p_SCIP scip) {
+    return SCIPJNIJNI.SCIPgetSolvingTime(SWIGTYPE_p_SCIP.getCPtr(scip));
+  }
+
 }
